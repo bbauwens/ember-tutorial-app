@@ -1,47 +1,24 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'super-rentals/tests/helpers';
-import { render, click } from '@ember/test-helpers';
-import RentalImage from 'super-rentals/components/rental/image';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+import { on } from '@ember/modifier';
 
-module('Integration | Component | rental/image', function (hooks) {
-  setupRenderingTest(hooks);
+export default class RentalImage extends Component {
+  @tracked isLarge = false;
 
-  test('it renders the given image', async function (assert) {
-    await render(<template>
-      <RentalImage
-        src="/assets/images/teaching-tomster.png"
-        alt="Teaching Tomster"
-      />
-    </template>);
+  @action toggleSize() {
+    this.isLarge = !this.isLarge;
+  }
 
-    assert
-      .dom('.image img')
-      .exists()
-      .hasAttribute('src', '/assets/images/teaching-tomster.png')
-      .hasAttribute('alt', 'Teaching Tomster');
-   });
-
-  test('clicking on the component toggles its size', async function (assert) {
-    await render(<template>
-      <RentalImage
-        src="/assets/images/teaching-tomster.png"
-        alt="Teaching Tomster"
-      />
-    </template>);
-
-    assert.dom('button.image').exists();
-
-    assert.dom('.image').doesNotHaveClass('large');
-    assert.dom('.image small').hasText('View Larger');
-
-    await click('button.image');
-
-    assert.dom('.image').hasClass('large');
-    assert.dom('.image small').hasText('View Smaller');
-
-    await click('button.image');
-
-    assert.dom('.image').doesNotHaveClass('large');
-    assert.dom('.image small').hasText('View Larger');
-  });
-});
+  <template>
+    <button type="button" class="image {{if this.isLarge "large"}}" {{on "click" this.toggleSize}}>
+      <img ...attributes>
+      {{#if this.isLarge}}
+        <small>View Smaller</small>
+      {{else}}
+        <small>View Larger</small>
+      {{/if}}
+      <small>View {{if this.isLarge "Smaller" "Larger"}}</small>
+    </button>
+  </template>
+}
