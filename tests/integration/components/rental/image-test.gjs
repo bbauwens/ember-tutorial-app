@@ -1,24 +1,26 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { on } from '@ember/modifier';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'super-rentals/tests/helpers';
+import { render } from '@ember/test-helpers';
+import RentalImage from 'super-rentals/components/rental/image';
 
-export default class RentalImage extends Component {
-  @tracked isLarge = false;
+module('Integration | Component | rental/image', function (hooks) {
+  setupRenderingTest(hooks);
 
-  @action toggleSize() {
-    this.isLarge = !this.isLarge;
-  }
+ 
+  test('it renders the given image', async function (assert) {
+    await render(<template>
+      
+      <RentalImage
+        src="/assets/images/teaching-tomster.png"
+        alt="Teaching Tomster"
+      />
+    </template>);
 
-  <template>
-    <button type="button" class="image {{if this.isLarge "large"}}" {{on "click" this.toggleSize}}>
-      <img ...attributes>
-      {{#if this.isLarge}}
-        <small>View Smaller</small>
-      {{else}}
-        <small>View Larger</small>
-      {{/if}}
-      <small>View {{if this.isLarge "Smaller" "Larger"}}</small>
-    </button>
-  </template>
-}
+  
+    assert
+      .dom('.image img')
+      .exists()
+      .hasAttribute('src', '/assets/images/teaching-tomster.png')
+      .hasAttribute('alt', 'Teaching Tomster');
+   });
+});
