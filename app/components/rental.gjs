@@ -5,6 +5,7 @@
       <div class="detail owner">
         <span>Owner:</span> Veruca Salt
       </div>
+      
       <div class="detail type">
         <span>Type:</span> Standalone
       </div>
