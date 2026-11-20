@@ -1,4 +1,3 @@
-
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'super-rentals/tests/helpers';
 import { render } from '@ember/test-helpers';
@@ -8,7 +7,7 @@ import { tracked } from '@glimmer/tracking';
 module('Integration | Component | rental', function (hooks) {
   setupRenderingTest(hooks);
 
-    await render(<template><Rental /></template>);
+  test('it renders information about a rental property', async function (assert) {
     class State { 
       @tracked rental = {
         title: 'Grand Old Mansion',
