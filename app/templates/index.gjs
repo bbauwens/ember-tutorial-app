@@ -9,6 +9,8 @@ import Rental from 'super-rentals/components/rental';
     <LinkTo @route="about" class="button">About Us</LinkTo>
   </Jumbo>
 
+  <h1>{{@model.title}}</h1>
+
   <div class="rentals">
     <ul class="results">
       <li><Rental /></li>
