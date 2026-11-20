@@ -13,9 +13,9 @@ import Rental from 'super-rentals/components/rental';
 
   <div class="rentals">
     <ul class="results">
-      <li><Rental @rental={{@model}} /></li>
-      <li><Rental @rental={{@model}} /></li>
-      <li><Rental @rental={{@model}} /></li>
+      {{#each @model as |rental|}}
+        <li><Rental @rental={{rental}} /></li>
+      {{/each}}
     </ul>
   </div>
 </template>
