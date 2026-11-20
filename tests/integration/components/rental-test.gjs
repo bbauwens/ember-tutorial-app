@@ -6,23 +6,14 @@ import Rental from 'super-rentals/components/rental';
 module('Integration | Component | rental', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Updating values is achieved using autotracking, just like in app code. For example:
-    // class State { @tracked myProperty = 0; }; const state = new State();
-    // and update using state.myProperty = 1; await rerender();
-    // Handle any actions with function myAction(val) { ... };
-
+  test('it renders information about a rental property', async function (assert) {
     await render(<template><Rental /></template>);
 
-    assert.dom().hasText('');
-
-    // Template block usage:
-    await render(<template>
-      <Rental>
-        template block text
-      </Rental>
-    </template>);
-
-    assert.dom().hasText('template block text');
+    assert.dom('article').hasClass('rental');
+    assert.dom('article h3').hasText('Grand Old Mansion');
+    assert.dom('article .detail.owner').includesText('Veruca Salt');
+    assert.dom('article .detail.type').includesText('Standalone');
+    assert.dom('article .detail.location').includesText('San Francisco');
+    assert.dom('article .detail.bedrooms').includesText('15');
   });
 });
