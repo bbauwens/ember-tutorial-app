@@ -44,7 +44,7 @@ module.exports = function (environment) {
     // here you can enable a production-specific feature
   }
 
-   ENV.TOMTOM_ACCESS_TOKEN = 2ZPkUlHNHQ2U40cAvzymXPLinTaeR7vO;
+   ENV.TOMTOM_ACCESS_TOKEN = '2ZPkUlHNHQ2U40cAvzymXPLinTaeR7vO';
 
   return ENV;
 };
